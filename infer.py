@@ -47,7 +47,7 @@ def clear_screen():
         os.system("cls")
     else:
         os.system("clear")
-    print(Fore.YELLOW + Style.BRIGHT + "欢迎使用DISC-MedLLM，输入进行对话，clear 清空历史，CTRL+C 中断生成，stream 开关流式生成，exit 结束。")
+    print(Fore.YELLOW + Style.BRIGHT + "欢迎使用LightBig-MedLLM，输入进行对话，clear 清空历史，CTRL+C 中断生成，stream 开关流式生成，exit 结束。")
     return []
 
 
@@ -68,7 +68,7 @@ def main(stream=True):
             if prompt.strip() == "clear":
                 messages = clear_screen()
                 continue
-            print(Fore.CYAN + Style.BRIGHT + "\nDISC-MedLLM：" + Style.NORMAL, end='')
+            print(Fore.CYAN + Style.BRIGHT + "\nLightBig-MedLLM：" + Style.NORMAL, end='')
             if prompt.strip() == "stream":
                 stream = not stream
                 print(Fore.YELLOW + "({}流式生成)\n".format("开启" if stream else "关闭"), end='')

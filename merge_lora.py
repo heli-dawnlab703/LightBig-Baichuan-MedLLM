@@ -8,8 +8,8 @@ import torch
 
 def merge_lora_to_base_model():
     model_name_or_path = '/hy-tmp/params/DISC-MedLLM'
-    adapter_name_or_path = './output/final/'
-    save_path = './output/merge/'
+    adapter_name_or_path = './output/baichuan-13b/final/'
+    save_path = './output/baichuan-13b/merge/'
 
     config = AutoConfig.from_pretrained(model_name_or_path)
     tokenizer = AutoTokenizer.from_pretrained(

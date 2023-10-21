@@ -5,8 +5,8 @@ from tqdm import tqdm
 
 file_path = "../data/YIER医疗大模型评测-测试公开集（无答案）.json"
 test_path = "../data/YIER-test.json"
-result_path = "../data/result/ft_pt_answer_1.json"
-out_path = '../data/submit_test.json'
+result_path = "../data/result/ft_pt_answer_2.json"
+out_path = '../data/submit_test_1.json'
 
 nrow = sum(1 for _ in open(file_path, 'r'))
 # 打开JSON文件并解析数据

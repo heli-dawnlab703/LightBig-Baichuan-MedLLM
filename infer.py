@@ -9,11 +9,11 @@ from transformers.generation.utils import GenerationConfig
 
 file_path = "./train/data/YIER-test.json"
 os.makedirs("./train/data/result", exist_ok=True)
-save_path = os.path.join("./train/data/result", "ft_pt_answer_{}.json".format(1))
+save_path = os.path.join("./train/data/result", "ft_pt_answer_{}.json".format(2))
 def init_model():
     print("init model ...")
     model = AutoModelForCausalLM.from_pretrained(
-        "/hy-tmp/LLM/DISC-MedLLM/output/merge",
+        "./output/baichuan-13b/merge",
         torch_dtype=torch.float16,
         device_map="auto",
         trust_remote_code=True,
@@ -74,8 +74,8 @@ def main(stream=True):
                 print(Fore.YELLOW + "({}流式生成)\n".format("开启" if stream else "关闭"), end='')
                 continue
             messages.append({"role": "user", "content": prompt})
+            save_data = {"result": []}
             if stream:
-                save_data = {"result" : []}
                 position = 0
                 try:
                     for response in model.chat(tokenizer, messages, stream=True):
@@ -94,8 +94,12 @@ def main(stream=True):
             else:
                 response = model.chat(tokenizer, messages)
                 print(response)
+                save_data["result"].append(response)
                 if torch.backends.mps.is_available():
                     torch.mps.empty_cache()
+                fin = open(save_path, "a", encoding="utf-8")
+                fin.write(json.dumps(save_data, ensure_ascii=False) + "\n")
+                fin.close()
             messages.append({"role": "assistant", "content": response})
 
         print(Style.RESET_ALL)

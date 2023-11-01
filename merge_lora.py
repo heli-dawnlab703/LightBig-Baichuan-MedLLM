@@ -1,6 +1,7 @@
 from peft import PeftModel
 from transformers import AutoModelForCausalLM, AutoTokenizer, AutoConfig
 import torch
+
 """
 使用该脚本，将lora的权重合并大base model中
 """
